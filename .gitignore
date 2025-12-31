@@ -3,3 +3,9 @@ __pycache__/
 .ipynb_checkpoints/
 data/raw/
 data/processed/
+# IDEs
+.idea/
+*.iml
+# Data
+data/
+notebooks/data/raw/
