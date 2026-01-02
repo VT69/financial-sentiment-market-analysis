@@ -13,3 +13,6 @@ snscrape
 scikit-learn
 tensorflow
 python-dateutil
+django-pipeline
+joblib
+pytrends
