@@ -16,3 +16,4 @@ python-dateutil
 django-pipeline
 joblib
 pytrends
+plotly
