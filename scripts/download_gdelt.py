@@ -1,79 +1,31 @@
 import requests
-import pandas as pd
-import time
-from datetime import datetime, timedelta
-import os
+import zipfile
+import io
+from pathlib import Path
 
-BASE_URL = "https://api.gdeltproject.org/api/v2/doc/doc"
+BASE_URL = "http://data.gdeltproject.org/events"
+RAW_DIR = Path("../data/raw/gdelt/events")
+RAW_DIR.mkdir(parents=True, exist_ok=True)
 
-def fetch_gdelt(query, start_date, end_date, asset):
-    params = {
-        "query": query,
-        "mode": "artlist",
-        "format": "json",
-        "maxrecords": 250,
-        "startdatetime": start_date.strftime("%Y%m%d%H%M%S"),
-        "enddatetime": end_date.strftime("%Y%m%d%H%M%S"),
-    }
+def download_quarter(year, quarter):
+    qmap = {1: "Q1", 2: "Q2", 3: "Q3", 4: "Q4"}
+    fname = f"{year}{qmap[quarter]}.zip"
+    url = f"{BASE_URL}/{fname}"
+
+    print(f"\n📦 Downloading {fname}")
 
     try:
-        response = requests.get(BASE_URL, params=params, timeout=20)
-
-        if response.status_code != 200 or response.text.strip() == "":
-            return pd.DataFrame()
-
-        data = response.json()
-        articles = data.get("articles", [])
-
-        records = []
-        for art in articles:
-            records.append({
-                "timestamp": art.get("seendate"),
-                "text": (art.get("title", "") + " " + art.get("snippet", "")).strip(),
-                "source": art.get("source"),
-                "asset": asset,
-            })
-
-        return pd.DataFrame(records)
-
+        r = requests.get(url, timeout=60)
+        r.raise_for_status()
     except Exception as e:
-        print(f"[ERROR] {e}")
-        return pd.DataFrame()
+        print(f"✗ Failed {fname}: {e}")
+        return
 
+    with zipfile.ZipFile(io.BytesIO(r.content)) as z:
+        for file in z.namelist():
+            out = RAW_DIR / file
+            z.extract(file, RAW_DIR)
+            size_mb = out.stat().st_size / 1e6
+            print(f"  → Extracted {file} ({size_mb:.1f} MB)")
 
-def download_gdelt_asset(query, asset, start, end):
-    all_data = []
-    current = start
-
-    while current < end:
-        next_week = current + timedelta(days=7)
-        print(f"[INFO] {asset} | {current.date()} → {next_week.date()}")
-
-        df = fetch_gdelt(query, current, next_week, asset)
-
-        if not df.empty:
-            print(f"  + {len(df)} articles")
-            all_data.append(df)
-        else:
-            print("  - No data")
-
-        time.sleep(3)  # rate limit
-        current = next_week
-
-    if all_data:
-        return pd.concat(all_data, ignore_index=True)
-    return pd.DataFrame()
-
-
-if __name__ == "__main__":
-    os.makedirs("data/raw", exist_ok=True)
-
-    btc_news = download_gdelt_asset(
-        query="bitcoin OR cryptocurrency",
-        asset="BTC",
-        start=datetime(2019, 1, 1),
-        end=datetime(2024, 1, 1),
-    )
-
-    btc_news.to_csv("data/raw/gdelt_btc_news.csv", index=False)
-    print(f"\n[SAVED] BTC news rows: {len(btc_news)}")
+    print(f"✅ Completed {year} {qmap[quarter]}")
