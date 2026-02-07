@@ -24,7 +24,7 @@ The goal is not just prediction, but interpretability, robustness, and real-worl
 •Evaluate statistical & economic significance
 •Deploy a live, end-to-end ML pipeline with a public dashboard
 
-
+```bash
 🗂️ Project Architecture
 |
 |
@@ -47,7 +47,7 @@ The goal is not just prediction, but interpretability, robustness, and real-worl
 ├── models/                 # Saved trained models
 ├── README.md
 └── requirements.txt
-
+```
 
 📊 Data Sources
 
