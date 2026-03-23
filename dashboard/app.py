@@ -533,13 +533,27 @@ with st.sidebar:
         transition: all 0.15s ease !important;
     }
     div[data-testid="stSidebar"] .stButton button:hover {
-        background: rgba(0,200,248,0.05) !important;
+        background: rgba(0,200,248,0.06) !important;
         color: #dce8f5 !important;
-        border-left-color: rgba(0,200,248,0.3) !important;
+        border-left-color: rgba(0,200,248,0.4) !important;
     }
-    div[data-testid="stSidebar"] .stButton button:focus {
+    div[data-testid="stSidebar"] .stButton button:focus,
+    div[data-testid="stSidebar"] .stButton button:active {
         outline: none !important;
         box-shadow: none !important;
+    }
+    /* Active page button — override primary orange with cyan */
+    div[data-testid="stSidebar"] .stButton button[kind="primary"] {
+        background: rgba(0,200,248,0.10) !important;
+        color: #dce8f5 !important;
+        font-weight: 600 !important;
+        border-left: 2px solid #00c8f8 !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+    }
+    div[data-testid="stSidebar"] .stButton button[kind="primary"]:hover {
+        background: rgba(0,200,248,0.15) !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -636,30 +650,52 @@ if page == "overview":
 
     with col_l:
         st.markdown("<div class='sh'>BTC Price & GMSI · 2016–2024</div>", unsafe_allow_html=True)
+        # Convert dates to strings to avoid timezone serialization issues on Cloud
+        dates_str = mdf.date.astype(str)
         fig = make_subplots(rows=2, cols=1, shared_xaxes=True,
                             row_heights=[0.6,0.4], vertical_spacing=0.04)
-        fig.add_trace(go.Scatter(x=mdf.date, y=mdf.btc_price, name="BTC Price",
-            line=dict(color=C["btc"],width=1.4), fill="tozeroy",
-            fillcolor="rgba(247,147,26,0.06)"), row=1,col=1)
-        fig.add_trace(go.Scatter(x=mdf.date, y=mdf.gmsi, name="GMSI",
-            line=dict(color=C["gmsi"],width=1.4), fill="tozeroy",
-            fillcolor="rgba(0,212,255,0.07)"), row=2,col=1)
+        fig.add_trace(go.Scatter(x=dates_str, y=mdf.btc_price, name="BTC Price",
+            line=dict(color=C["btc"],width=1.5), fill="tozeroy",
+            fillcolor="rgba(247,147,26,0.07)"), row=1,col=1)
+        fig.add_trace(go.Scatter(x=dates_str, y=mdf.gmsi, name="GMSI",
+            line=dict(color=C["gmsi"],width=1.5), fill="tozeroy",
+            fillcolor="rgba(0,200,248,0.08)"), row=2,col=1)
         # Regime shading
-        for _,grp in mdf.groupby((mdf.regime!=mdf.regime.shift()).cumsum()):
-            r = grp.regime.iloc[0]
+        regime_arr = mdf.regime.values
+        breaks = np.where(np.array(regime_arr[1:]) != np.array(regime_arr[:-1]))[0] + 1
+        starts = np.concatenate([[0], breaks])
+        ends   = np.concatenate([breaks, [len(regime_arr)]])
+        for s,e in zip(starts, ends):
+            r = regime_arr[s]
             clr = {"low":"rgba(16,185,129,.07)","high":"rgba(239,68,68,.09)",
                    "medium":"rgba(0,0,0,0)"}[r]
-            for row in [1,2]:
-                fig.add_vrect(x0=grp.date.iloc[0],x1=grp.date.iloc[-1],
-                              fillcolor=clr,line_width=0,row=row,col=1)
-        t(fig, h=380)
-        fig.update_yaxes(title_text="BTC Price",row=1,col=1)
-        fig.update_yaxes(title_text="GMSI (z-score)",row=2,col=1)
+            if clr != "rgba(0,0,0,0)":
+                for row in [1,2]:
+                    fig.add_vrect(x0=dates_str.iloc[s], x1=dates_str.iloc[min(e,len(dates_str)-1)],
+                                  fillcolor=clr, line_width=0, row=row, col=1)
+        t(fig, h=360)
+        fig.update_yaxes(title_text="Price (USD)", row=1, col=1)
+        fig.update_yaxes(title_text="GMSI", row=2, col=1)
         st.plotly_chart(fig, use_container_width=True)
+
+        # Real figures row below the chart
+        st.markdown("<div class='sh'>Real Pipeline Figures</div>", unsafe_allow_html=True)
+        rc1, rc2 = st.columns(2)
+        with rc1:
+            img = load_img("cond_exp_BTC.png")
+            if img:
+                st.image(img, use_container_width=True)
+                st.markdown("<div class='fig-caption'>E[Vol | GMSI Quintile] — BTC · Core Paper 1 finding</div>",
+                            unsafe_allow_html=True)
+        with rc2:
+            img = load_img("fig6_shock_decay_comparison.png")
+            if img:
+                st.image(img, use_container_width=True)
+                st.markdown("<div class='fig-caption'>Shock decay curves — BTC vs NIFTY · Paper 2</div>",
+                            unsafe_allow_html=True)
 
     with col_r:
         st.markdown("<div class='sh'>Three Core Research Findings</div>", unsafe_allow_html=True)
-
         st.markdown("""
         <div class='cbox cbox-green'>
             <span class='tag tag-green'>FINDING 1 — PAPER 1</span><br>
@@ -673,15 +709,76 @@ if page == "overview":
             <strong>Result is Not by Chance</strong><br>
             Placebo permutation test (500 shuffles): real BTC correlation
             <strong>−0.084</strong> falls in the bottom 2% of the null
-            distribution. The negative GMSI–volatility relationship is statistically
-            genuine.
+            distribution. Statistically genuine — not a data artifact.
         </div>
         <div class='cbox cbox-blue'>
             <span class='tag tag-blue'>FINDING 3 — PAPER 2</span><br>
-            <strong>Shocks Decay Faster in High Stress</strong><br>
-            NIFTY Vol Persistence (AC1): Low regime=<strong>0.148</strong>,
-            High regime=<strong>0.083</strong>. Counter-intuitive: markets
-            recover faster from shocks when stress is already elevated.
+            <strong>AC₁ Paradox — Shocks Decay Faster in High Stress</strong><br>
+            NIFTY Vol Persistence: Low=<strong>0.148</strong> → High=<strong>0.083</strong>.
+            Complacent markets absorb shocks worst.
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br><div class='sh'>Results at a Glance</div>", unsafe_allow_html=True)
+        st.markdown("""
+        <table style="width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:11px;">
+        <tr style="border-bottom:1px solid #1e2d45;">
+            <td style="padding:7px 4px;color:#4a607d;text-transform:uppercase;
+                       font-size:9px;letter-spacing:.1em;">Metric</td>
+            <td style="padding:7px 4px;color:#4a607d;text-transform:uppercase;
+                       font-size:9px;letter-spacing:.1em;">BTC</td>
+            <td style="padding:7px 4px;color:#4a607d;text-transform:uppercase;
+                       font-size:9px;letter-spacing:.1em;">NIFTY</td>
+        </tr>
+        <tr style="border-bottom:1px solid #111827;">
+            <td style="padding:7px 4px;color:#8ba3c4;">Spearman r (7d fwd)</td>
+            <td style="padding:7px 4px;color:#ef4444;font-weight:600;">−0.084</td>
+            <td style="padding:7px 4px;color:#ef4444;font-weight:600;">−0.058</td>
+        </tr>
+        <tr style="border-bottom:1px solid #111827;">
+            <td style="padding:7px 4px;color:#8ba3c4;">Placebo p-value</td>
+            <td style="padding:7px 4px;color:#00d68f;font-weight:600;">&lt;0.02</td>
+            <td style="padding:7px 4px;color:#00d68f;font-weight:600;">&lt;0.05</td>
+        </tr>
+        <tr style="border-bottom:1px solid #111827;">
+            <td style="padding:7px 4px;color:#8ba3c4;">MFI peak (date)</td>
+            <td style="padding:7px 4px;color:#dce8f5;">0.76 (Mar 2020)</td>
+            <td style="padding:7px 4px;color:#dce8f5;">—</td>
+        </tr>
+        <tr style="border-bottom:1px solid #111827;">
+            <td style="padding:7px 4px;color:#8ba3c4;">Shock peak horizon</td>
+            <td style="padding:7px 4px;color:#dce8f5;">t+3 (retail lag)</td>
+            <td style="padding:7px 4px;color:#dce8f5;">t+1 (institutional)</td>
+        </tr>
+        <tr style="border-bottom:1px solid #111827;">
+            <td style="padding:7px 4px;color:#8ba3c4;">AC₁ Low→High regime</td>
+            <td style="padding:7px 4px;color:#dce8f5;">—</td>
+            <td style="padding:7px 4px;color:#dce8f5;">0.148 → 0.083</td>
+        </tr>
+        <tr>
+            <td style="padding:7px 4px;color:#8ba3c4;">Analysis period</td>
+            <td colspan="2" style="padding:7px 4px;color:#dce8f5;">2016–2024 · ~2000 days</td>
+        </tr>
+        </table>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br><div class='sh'>Research Status</div>", unsafe_allow_html=True)
+        st.markdown("""
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;line-height:2.2;">
+            <div><span style="color:#00d68f;">✓</span>
+                 <span style="color:#8ba3c4;"> GMSI constructed &amp; validated</span></div>
+            <div><span style="color:#00d68f;">✓</span>
+                 <span style="color:#8ba3c4;"> Placebo tests complete</span></div>
+            <div><span style="color:#00d68f;">✓</span>
+                 <span style="color:#8ba3c4;"> MFI validated vs VIX (FRED)</span></div>
+            <div><span style="color:#00d68f;">✓</span>
+                 <span style="color:#8ba3c4;"> Shock propagation analysed</span></div>
+            <div><span style="color:#00d68f;">✓</span>
+                 <span style="color:#8ba3c4;"> Dashboard deployed</span></div>
+            <div><span style="color:#ffb830;">◎</span>
+                 <span style="color:#8ba3c4;"> Paper 1 — writing in progress</span></div>
+            <div><span style="color:#ffb830;">◎</span>
+                 <span style="color:#8ba3c4;"> Paper 2 — writing in progress</span></div>
         </div>
         """, unsafe_allow_html=True)
 
