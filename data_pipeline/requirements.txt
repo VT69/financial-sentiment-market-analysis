@@ -1,0 +1,33 @@
+# ── Core data stack ──────────────────────────────────────────────────────────
+pandas>=2.0
+numpy>=1.24
+pyarrow>=14.0          # parquet support for GDELT cache
+
+# ── Environment / config ─────────────────────────────────────────────────────
+python-dotenv>=1.0
+
+# ── Source 1: yfinance ───────────────────────────────────────────────────────
+yfinance>=0.2.36
+
+# ── Source 2: FRED ───────────────────────────────────────────────────────────
+fredapi>=0.5.1
+
+# ── Source 3: GDELT via BigQuery ─────────────────────────────────────────────
+google-cloud-bigquery>=3.11
+google-auth>=2.20
+db-dtypes>=1.1          # BigQuery → pandas type conversions
+
+# ── Source 4: Google Trends ──────────────────────────────────────────────────
+pytrends>=4.9.2
+
+# ── Source 5: Alpha Vantage ──────────────────────────────────────────────────
+requests>=2.31
+
+# ── Source 6: Reddit ─────────────────────────────────────────────────────────
+praw>=7.7
+
+# ── Source 7: NewsAPI ────────────────────────────────────────────────────────
+# Uses requests (already listed above)
+
+# ── Source 8: Quandl / Nasdaq Data Link ──────────────────────────────────────
+quandl>=3.6.0

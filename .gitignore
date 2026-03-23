@@ -1,11 +1,35 @@
+# Environment — NEVER commit API keys
 .env
+
+# Python cache
 __pycache__/
+*.py[cod]
+*.pyo
 .ipynb_checkpoints/
-data/raw/
-data/processed/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
 # IDEs
 .idea/
 *.iml
-# Data
-data/
+.vscode/
+
+# ── Data directories ─────────────────────────────────────────────
+# Raw and processed data is large — don't commit it.
+# Keep manifest.json and pipeline.log tracked so CI can inspect them.
+data/raw/yfinance/
+data/raw/fred/
+data/raw/gdelt/
+data/raw/google_trends/
+data/raw/alpha_vantage/
+data/raw/reddit/
+data/raw/newsapi/
+data/raw/quandl/
+data/processed/
 notebooks/data/raw/
+
+# Parquet cache files
+*.parquet

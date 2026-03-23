@@ -1,0 +1,618 @@
+{
+  "generated_at": "2026-03-21T10:05:34Z",
+  "total_sources": 17,
+  "sources": [
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/BTC-USD.csv",
+      "date_range": {
+        "start": "2014-09-17",
+        "end": "2026-03-21"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4204,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.33,
+        "vol_30d": 0.71,
+        "vol_60d": 1.43
+      },
+      "pull_timestamp": "2026-03-21T10:04:56Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/ETH-USD.csv",
+      "date_range": {
+        "start": "2017-11-09",
+        "end": "2026-03-21"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 3055,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.03,
+        "vol_7d": 0.23,
+        "vol_14d": 0.46,
+        "vol_30d": 0.98,
+        "vol_60d": 1.96
+      },
+      "pull_timestamp": "2026-03-21T10:04:57Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_NSEI.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 3983,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.03,
+        "vol_7d": 0.18,
+        "vol_14d": 0.35,
+        "vol_30d": 0.75,
+        "vol_60d": 1.51
+      },
+      "pull_timestamp": "2026-03-21T10:05:03Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_GSPC.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4078,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.74,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:03Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_DJI.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4078,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.74,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:06Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_IXIC.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4078,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.74,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:08Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_FTSE.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4095,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.73,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:10Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_N225.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-19"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 3964,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.03,
+        "vol_7d": 0.18,
+        "vol_14d": 0.35,
+        "vol_30d": 0.76,
+        "vol_60d": 1.51
+      },
+      "pull_timestamp": "2026-03-21T10:05:12Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_VIX.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4078,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.74,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:14Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_VXN.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4078,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.74,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:16Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/GC_F.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4077,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.74,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:18Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/CL_F.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4078,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.07,
+        "vol_7d": 0.37,
+        "vol_14d": 0.71,
+        "vol_30d": 1.5,
+        "vol_60d": 2.97
+      },
+      "pull_timestamp": "2026-03-21T10:05:20Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/USDINR_X.csv",
+      "date_range": {
+        "start": "2010-01-01",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4221,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.33,
+        "vol_30d": 0.71,
+        "vol_60d": 1.42
+      },
+      "pull_timestamp": "2026-03-21T10:05:22Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/DX-Y.NYB.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4079,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.74,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:24Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_TNX.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4076,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.74,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:26Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_TYX.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4076,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.02,
+        "vol_7d": 0.17,
+        "vol_14d": 0.34,
+        "vol_30d": 0.74,
+        "vol_60d": 1.47
+      },
+      "pull_timestamp": "2026-03-21T10:05:28Z"
+    },
+    {
+      "source": "yfinance",
+      "file_path": "E:/financial-sentiment-research-project/data/raw/yfinance/_IRX.csv",
+      "date_range": {
+        "start": "2010-01-04",
+        "end": "2026-03-20"
+      },
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adj_close",
+        "log_return",
+        "vol_7d",
+        "vol_14d",
+        "vol_30d",
+        "vol_60d"
+      ],
+      "rows": 4076,
+      "pct_missing": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "adj_close": 0.0,
+        "log_return": 0.07,
+        "vol_7d": 0.52,
+        "vol_14d": 0.86,
+        "vol_30d": 1.64,
+        "vol_60d": 3.12
+      },
+      "pull_timestamp": "2026-03-21T10:05:34Z"
+    }
+  ]
+}

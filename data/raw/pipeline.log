@@ -1,0 +1,80 @@
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  ╔══════════════════════════════════════════════════════════╗
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  ║         FINANCIAL DATA PIPELINE — STARTING               ║
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  ╚══════════════════════════════════════════════════════════╝
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  Sources to run: yfinance
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]    Running source: YFINANCE
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-03-21 15:30:32  [ERROR   ]  [pipeline.master]  Unhandled exception in source 'yfinance': No module named 'yfinance'
+Traceback (most recent call last):
+  File "E:\financial-sentiment-research-project\data_pipeline\fetch_all.py", line 102, in run_source
+    module = importlib.import_module(module_path)
+  File "D:\anaconda\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "E:\financial-sentiment-research-project\data_pipeline\sources\fetch_yfinance.py", line 28, in <module>
+    import yfinance as yf
+ModuleNotFoundError: No module named 'yfinance'
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]    Finished yfinance in 0.0s — 0 manifest entries
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  Writing manifest.json (0 total entries)...
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  manifest.json written successfully.
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  
+2026-03-21 15:30:32  [INFO    ]  [pipeline.master]  Pipeline completed in 0.0 seconds.
+2026-03-21 15:34:51  [INFO    ]  [pipeline.master]  ╔══════════════════════════════════════════════════════════╗
+2026-03-21 15:34:51  [INFO    ]  [pipeline.master]  ║         FINANCIAL DATA PIPELINE — STARTING               ║
+2026-03-21 15:34:51  [INFO    ]  [pipeline.master]  ╚══════════════════════════════════════════════════════════╝
+2026-03-21 15:34:51  [INFO    ]  [pipeline.master]  Sources to run: yfinance
+2026-03-21 15:34:51  [INFO    ]  [pipeline.master]  
+2026-03-21 15:34:51  [INFO    ]  [pipeline.master]  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-03-21 15:34:51  [INFO    ]  [pipeline.master]    Running source: YFINANCE
+2026-03-21 15:34:51  [INFO    ]  [pipeline.master]  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-03-21 15:34:53  [INFO    ]  [pipeline.yfinance]  === yfinance: starting downloads for 17 tickers ===
+2026-03-21 15:34:53  [INFO    ]  [pipeline.yfinance]  Downloading  — BTC-USD
+2026-03-21 15:34:56  [INFO    ]  [pipeline.yfinance]  SAVED      — BTC-USD  → BTC-USD.csv  (4204 rows)
+2026-03-21 15:34:56  [INFO    ]  [pipeline.yfinance]  Downloading  — ETH-USD
+2026-03-21 15:34:57  [INFO    ]  [pipeline.yfinance]  SAVED      — ETH-USD  → ETH-USD.csv  (3055 rows)
+2026-03-21 15:34:57  [INFO    ]  [pipeline.yfinance]  Downloading  — ^NSEI
+2026-03-21 15:35:03  [INFO    ]  [pipeline.yfinance]  SAVED      — ^NSEI  → _NSEI.csv  (3983 rows)
+2026-03-21 15:35:03  [INFO    ]  [pipeline.yfinance]  Downloading  — ^GSPC
+2026-03-21 15:35:03  [INFO    ]  [pipeline.yfinance]  SAVED      — ^GSPC  → _GSPC.csv  (4078 rows)
+2026-03-21 15:35:03  [INFO    ]  [pipeline.yfinance]  Downloading  — ^DJI
+2026-03-21 15:35:06  [INFO    ]  [pipeline.yfinance]  SAVED      — ^DJI  → _DJI.csv  (4078 rows)
+2026-03-21 15:35:06  [INFO    ]  [pipeline.yfinance]  Downloading  — ^IXIC
+2026-03-21 15:35:08  [INFO    ]  [pipeline.yfinance]  SAVED      — ^IXIC  → _IXIC.csv  (4078 rows)
+2026-03-21 15:35:08  [INFO    ]  [pipeline.yfinance]  Downloading  — ^FTSE
+2026-03-21 15:35:10  [INFO    ]  [pipeline.yfinance]  SAVED      — ^FTSE  → _FTSE.csv  (4095 rows)
+2026-03-21 15:35:10  [INFO    ]  [pipeline.yfinance]  Downloading  — ^N225
+2026-03-21 15:35:12  [INFO    ]  [pipeline.yfinance]  SAVED      — ^N225  → _N225.csv  (3964 rows)
+2026-03-21 15:35:12  [INFO    ]  [pipeline.yfinance]  Downloading  — ^VIX
+2026-03-21 15:35:14  [INFO    ]  [pipeline.yfinance]  SAVED      — ^VIX  → _VIX.csv  (4078 rows)
+2026-03-21 15:35:14  [INFO    ]  [pipeline.yfinance]  Downloading  — ^VXN
+2026-03-21 15:35:16  [INFO    ]  [pipeline.yfinance]  SAVED      — ^VXN  → _VXN.csv  (4078 rows)
+2026-03-21 15:35:16  [INFO    ]  [pipeline.yfinance]  Downloading  — GC=F
+2026-03-21 15:35:18  [INFO    ]  [pipeline.yfinance]  SAVED      — GC=F  → GC_F.csv  (4077 rows)
+2026-03-21 15:35:18  [INFO    ]  [pipeline.yfinance]  Downloading  — CL=F
+2026-03-21 15:35:20  [INFO    ]  [pipeline.yfinance]  SAVED      — CL=F  → CL_F.csv  (4078 rows)
+2026-03-21 15:35:20  [INFO    ]  [pipeline.yfinance]  Downloading  — USDINR=X
+2026-03-21 15:35:22  [INFO    ]  [pipeline.yfinance]  SAVED      — USDINR=X  → USDINR_X.csv  (4221 rows)
+2026-03-21 15:35:22  [INFO    ]  [pipeline.yfinance]  Downloading  — DX-Y.NYB
+2026-03-21 15:35:24  [INFO    ]  [pipeline.yfinance]  SAVED      — DX-Y.NYB  → DX-Y.NYB.csv  (4079 rows)
+2026-03-21 15:35:24  [INFO    ]  [pipeline.yfinance]  Downloading  — ^TNX
+2026-03-21 15:35:26  [INFO    ]  [pipeline.yfinance]  SAVED      — ^TNX  → _TNX.csv  (4076 rows)
+2026-03-21 15:35:26  [INFO    ]  [pipeline.yfinance]  Downloading  — ^TYX
+2026-03-21 15:35:28  [INFO    ]  [pipeline.yfinance]  SAVED      — ^TYX  → _TYX.csv  (4076 rows)
+2026-03-21 15:35:28  [INFO    ]  [pipeline.yfinance]  Downloading  — ^IRX
+2026-03-21 15:35:34  [INFO    ]  [pipeline.yfinance]  SAVED      — ^IRX  → _IRX.csv  (4076 rows)
+2026-03-21 15:35:34  [INFO    ]  [pipeline.yfinance]  === yfinance: complete — 17/17 tickers saved ===
+2026-03-21 15:35:34  [INFO    ]  [pipeline.master]    Finished yfinance in 43.2s — 17 manifest entries
+2026-03-21 15:35:34  [INFO    ]  [pipeline.master]  
+2026-03-21 15:35:34  [INFO    ]  [pipeline.master]  Writing manifest.json (17 total entries)...
+2026-03-21 15:35:34  [INFO    ]  [pipeline.master]  manifest.json written successfully.
+2026-03-21 15:35:34  [INFO    ]  [pipeline.master]  
+2026-03-21 15:35:34  [INFO    ]  [pipeline.master]  Pipeline completed in 43.2 seconds.
