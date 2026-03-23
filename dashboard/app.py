@@ -494,14 +494,10 @@ PAGES = [
     ("methodology", "Methodology & Pipeline",        "M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 0 2-2h2a2 2 0 0 0 2 2"),
 ]
 
-# Use query params to track active page
-try:
-    params = st.query_params
-    page = params.get("p", "overview")
-    if page not in [p[0] for p in PAGES]:
-        page = "overview"
-except:
-    page = "overview"
+# Session-state navigation — no page reloads, works on Streamlit Cloud
+if "page" not in st.session_state:
+    st.session_state.page = "overview"
+page = st.session_state.page
 
 with st.sidebar:
     # Logo block
@@ -516,29 +512,54 @@ with st.sidebar:
     <div class="nav-section-label">Navigation</div>
     """, unsafe_allow_html=True)
 
-    # Nav buttons — rendered as HTML links with query params
+    # Nav buttons — pure st.button with CSS override, session_state routing
+    st.markdown("""
+    <style>
+    /* Override Streamlit button styles for nav */
+    div[data-testid="stSidebar"] .stButton button {
+        width: 100% !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 6px !important;
+        text-align: left !important;
+        padding: 8px 16px !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 12.5px !important;
+        font-weight: 400 !important;
+        color: #8ba3c4 !important;
+        margin: 1px 0 !important;
+        box-shadow: none !important;
+        border-left: 2px solid transparent !important;
+        transition: all 0.15s ease !important;
+    }
+    div[data-testid="stSidebar"] .stButton button:hover {
+        background: rgba(0,200,248,0.05) !important;
+        color: #dce8f5 !important;
+        border-left-color: rgba(0,200,248,0.3) !important;
+    }
+    div[data-testid="stSidebar"] .stButton button:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     for pid, label, icon_path in PAGES:
-        is_active = (page == pid)
-        active_cls = "active" if is_active else ""
-        # Use st.markdown with an <a> tag styled as button
-        icon_color = "#00c8f8" if is_active else "#4a607d"
-        st.markdown(f"""
-        <a href="?p={pid}" target="_self" class="nav-btn {active_cls}"
-           style="text-decoration:none;display:flex;align-items:center;gap:10px;
-                  padding:9px 16px;margin:1px 8px;border-radius:6px;cursor:pointer;
-                  border-left:2px solid {'#00c8f8' if is_active else 'transparent'};
-                  background:{'rgba(0,200,248,0.08)' if is_active else 'transparent'};">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                 stroke="{icon_color}" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-                <path d="{icon_path}"/>
-            </svg>
-            <span style="font-family:'Inter',sans-serif;font-size:12.5px;
-                         font-weight:{'600' if is_active else '400'};
-                         color:{'#dce8f5' if is_active else '#8ba3c4'};
-                         letter-spacing:0.01em;">{label}</span>
-        </a>
-        """, unsafe_allow_html=True)
+        is_active = (st.session_state.page == pid)
+        # Highlight active button via inline style injection
+        if is_active:
+            st.markdown(f"""
+            <style>
+            div[data-testid="stSidebar"] button[kind="secondary"]:nth-of-type(auto){{}}
+            </style>
+            """, unsafe_allow_html=True)
+        # Simple clean button — clicking navigates
+        btn_label = f"  {label}" if not is_active else f"  {label}"
+        if st.button(btn_label, key=f"nav_{pid}",
+                     type="primary" if is_active else "secondary",
+                     use_container_width=True):
+            st.session_state.page = pid
+            st.rerun()
 
     # Footer info block
     st.markdown("""
